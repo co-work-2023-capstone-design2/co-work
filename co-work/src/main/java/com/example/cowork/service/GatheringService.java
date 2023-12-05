@@ -2,6 +2,7 @@ package com.example.cowork.service;
 
 import com.example.cowork.etcData.Date;
 import com.example.cowork.model.GatheringModel;
+import com.example.cowork.payload.response.GatheringInfoResponse;
 import com.example.cowork.payload.response.MessageResponse;
 import com.example.cowork.payload.response.RandomCodeResponse;
 import com.example.cowork.payload.response.StateResponse;
@@ -90,7 +91,23 @@ public class GatheringService {
     }
 
     public ResponseEntity<?>getGatheringInfoByCode(String gathering_code){
-//        Optional<GatheringModel> = gatheringRepository.findById()
-        return null;
+        Optional<GatheringModel> optionalGatheringModel = gatheringRepository.findById(gathering_code);
+
+        if (optionalGatheringModel.isPresent()) {
+            GatheringModel existingGatheringModel = optionalGatheringModel.get();
+
+            return ResponseEntity
+                    .ok(new GatheringInfoResponse(
+                            200,
+                            existingGatheringModel.getGathering_code(),
+                            existingGatheringModel.getGathering_name(),
+                            existingGatheringModel.getGathering_owner(),
+                            existingGatheringModel.getGathering_explanation()
+                    ));
+        }
+
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse(400, "모임이 존재하지 않음"));
     }
 }

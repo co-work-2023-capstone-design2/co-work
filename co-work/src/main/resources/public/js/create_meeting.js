@@ -19,9 +19,30 @@ const characters = [
 ];
 
 // 새로 만들기
+function setOwner() {
+  const currentUser = localStorage.getItem("user");
+  $("#meeting-owner").attr("placeholder", currentUser);
+}
+
+function setMeetingCode() {
+  fetch(getMeetingCode, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json()).then((data) => {
+    console
+    const inviteCode = data.gathering_code;
+    $("#meeting-code").attr("placeholder", inviteCode);
+  });
+}
+
 $(".btn-new").on("click", () => {
   $(".container").addClass("hide");
   $(".container-new").removeClass("hide");
+
+  setOwner();
+  setMeetingCode();
 });
 
 // 새로 만들기 -다시 뽑기 버튼

@@ -1,9 +1,7 @@
 package com.example.cowork.controller;
 
-import com.example.cowork.model.GatheringModel;
 import com.example.cowork.payload.request.CreateGatheringRequest;
 import com.example.cowork.payload.request.SetLocationRequest;
-import com.example.cowork.repository.GatheringRepository;
 import com.example.cowork.service.GatheringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +40,6 @@ public class GatheringController {
     public ResponseEntity<?> getGatheringInfoByCode(@PathVariable("gathering_code") String gathering_code){
         return gatheringService.getGatheringInfoByCode(gathering_code);
     }
+
 
 }

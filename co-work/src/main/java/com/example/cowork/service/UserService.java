@@ -1,6 +1,7 @@
 package com.example.cowork.service;
 
 import com.example.cowork.model.UserModel;
+import com.example.cowork.payload.response.LoginResponse;
 import com.example.cowork.payload.response.MessageResponse;
 import com.example.cowork.payload.response.StateResponse;
 import com.example.cowork.repository.UserRepository;
@@ -33,7 +34,7 @@ public class UserService {
         if (user != null && user_pw.equals(user.getUser_pw())){
             // 로그인 성공
             return ResponseEntity
-                    .ok(new StateResponse(200));
+                    .ok(new LoginResponse(200, user_email));
         } else {
             // 로그인 실패;
             return ResponseEntity
