@@ -1,0 +1,15 @@
+.circle {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 50%;
+}
+
+.circle-middle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #6063dc;
+  margin: 5px;
+}

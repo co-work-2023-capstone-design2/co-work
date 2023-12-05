@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: end;
+  padding: 15px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-btn,
+.intro-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-btn {
+  padding-bottom: 20px;
+}

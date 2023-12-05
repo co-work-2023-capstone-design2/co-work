@@ -1,0 +1,17 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+input {
+  vertical-align: middle;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

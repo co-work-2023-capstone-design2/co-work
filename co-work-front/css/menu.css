@@ -1,0 +1,167 @@
+/* move.html */
+/* 투두 메뉴 */
+.container-todo {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  background-color: black;
+  color: white;
+  width: 400px;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: min-content 5fr;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.title-todo,
+.todo-list {
+  text-align: center;
+}
+
+.title-todo span {
+  font-size: 30px;
+  margin: 30px;
+}
+
+.todo-list {
+  width: inherit;
+}
+
+.todo-list-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+}
+
+.todo-list-section div {
+  font-size: 20px;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.todo-list-section div:hover {
+  color: #6063dc;
+  border-bottom: 1px solid #6063dc;
+}
+
+.selected {
+  color: #6063dc;
+}
+
+.todo-form,
+#todo-list div {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: black;
+  color: white;
+  font-family: "neodgm", sans-serif;
+}
+
+/* 채팅 메뉴 */
+.container-chat {
+  display: flex;
+  position: fixed;
+  bottom: 30px;
+  left: 50px;
+}
+
+.side-chatting {
+  position: fixed;
+  left: 0;
+  background-color: black;
+  color: white;
+  width: 400px;
+  height: 100%;
+  padding: 20px;
+}
+
+.side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.side-header img {
+  width: 35px;
+  height: 35px;
+}
+
+/* 텍스트 채팅 */
+#text-chat {
+  display: grid;
+  grid-template-rows: 0.5fr 5fr 0.7fr;
+}
+
+.chatting-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chatting-form input {
+  width: 300px;
+  height: 55px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff42;
+  color: white;
+  font-family: "neodgm", sans-serif;
+}
+
+.chatting-form img {
+  width: 55px;
+  height: 55px;
+}
+
+/* 음성 채팅 */
+#voice-chat {
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 4.7fr;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 3fr 1fr;
+  border-bottom: 1px solid white;
+  align-items: center;
+}
+
+.profile-me img {
+  width: 100px;
+  height: 100px;
+}
+
+#voice-state {
+  width: 50px;
+  height: 50px;
+}
+
+#voice-option {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-column: 2;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+#voice-exit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30px;
+  padding-bottom: 20px;
+}

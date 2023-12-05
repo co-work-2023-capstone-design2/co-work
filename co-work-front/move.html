@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/canvas.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/text.css" />
+    <title>캐릭터 이동 구현</title>
+  </head>
+  <body>
+    <div class="container-todo">
+      <div class="title-todo">
+        <span>TODO LIST</span>
+        <img src="img/down-arrow.png" />
+      </div>
+      <div class="todo-list">
+        <div class="todo-list-section">
+          <div class="meeting-check" id="meeting-todo">
+            <span>모임 </span>
+          </div>
+          <div class="personal-check" id="personal-todo">
+            <span>개인 </span>
+          </div>
+        </div>
+        <div class="todo-list-common">
+          <form class="todo-form">
+            <div class="todo-check">
+              <img src="img/check-none.png" />
+            </div>
+            <input type="text" />
+          </form>
+          <div id="todo-list"></div>
+        </div>
+        <div class="todo-list-personal hide">
+          <form class="todo-form">
+            <div class="todo-check">
+              <img src="img/check-none.png" />
+            </div>
+            <input type="text" />
+          </form>
+          <div id="todo-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-chat">
+      <div id="btn-text-chat">
+        <img src="img/chat.png" />
+      </div>
+      <div id="btn-voice-chat">
+        <img src="img/voice-chat.png" />
+      </div>
+    </div>
+
+    <!--채팅창 사이드바-->
+    <div class="side-chatting hide" id="text-chat">
+      <div class="side-header">
+        <span class="semi-title">채팅</span>
+        <img class="btn-chat-exit" src="img/exit-btn.png" />
+      </div>
+      <div id="chatting-log"></div>
+      <form class="chatting-form">
+        <input type="text" />
+        <div><img src="img/send-btn.png" /></div>
+      </form>
+    </div>
+
+    <!--음성 채팅창 사이드바-->
+    <div class="side-chatting hide" id="voice-chat">
+      <div class="side-header">
+        <span class="semi-title">음성 채팅</span>
+        <img class="btn-chat-exit" src="img/exit-btn.png" />
+      </div>
+      <div class="profile">
+        <div class="profile-me"></div>
+        <span class="semi-title">나</span>
+        <img id="voice-state" src="img/voice-on.png" />
+        <div id="voice-option">
+          <img src="img/horizontal-dot.png" />
+        </div>
+        <div id="voice-exit"><img src="img/voice-exit.png" /></div>
+      </div>
+      <div class="other-profile"></div>
+    </div>
+
+    <script src="js/img.js"></script>
+    <script src="js/move.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/text_chat.js"></script>
+    <script src="js/voice_chat.js"></script>
+  </body>
+</html>

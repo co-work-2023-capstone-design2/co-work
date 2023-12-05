@@ -1,0 +1,20 @@
+.main {
+  width: 1300px;
+  height: 700px;
+  border-radius: 30px;
+  border: none;
+  background-color: #afcd9fc2;
+  box-shadow: 1px 1px rgb(163, 162, 162);
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.right {
+  display: flex;
+  justify-content: end;
+}

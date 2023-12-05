@@ -1,0 +1,21 @@
+input {
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-family: "neodgm", sans-serif;
+  font-size: 30px;
+}
+
+textarea {
+  width: 300px;
+  height: 175px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-family: "neodgm", sans-serif;
+  font-size: 30px;
+}

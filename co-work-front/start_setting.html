@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/center_align.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/setting.css" />
+    <link rel="stylesheet" href="css/text.css" />
+    <link rel="stylesheet" href="css/input.css" />
+    <link rel="stylesheet" href="css/circle.css" />
+    <link rel="stylesheet" href="css/fix.css" />
+    <link rel="stylesheet" href="css/img-style.css" />
+    <title>Co-Work</title>
+  </head>
+  <body>
+    <div class="container">
+      <button class="btn-square btn-new">새로 만들기</button>
+      <button class="btn-square btn-link">초대 코드로 들어가기</button>
+    </div>
+
+    <!--새로 만들기: 건물 생성 컨테이너-->
+    <div class="container-new hide main">
+      <div class="meeting-title span-2 center">
+        <span class="semi-title">모임 이름</span>
+        <input class="input-meeing-name" type="text" />
+      </div>
+      <div class="meeting-img center">
+        <div class="img-box">
+          <div class="img">
+            <img id="img-building-setting" src="img/buildings/building_5.png" />
+          </div>
+          <div class="right">
+            <button class="btn-retry">&#128472; 다시 뽑기</button>
+          </div>
+        </div>
+      </div>
+      <div class="meeting-info center">
+        <div>
+          <div>
+            <span class="semi-title">건물 주인</span>
+            <input type="text" placeholder="로그인한 사용자로 수정" readonly />
+          </div>
+          <div>
+            <span class="semi-title">초대 코드</span>
+            <input type="text" placeholder="초대코드 생성 수정" readonly />
+          </div>
+          <div>
+            <span class="semi-title">건물 층수</span>
+            <button class="circle-middle title" id="btn-minus">-</button>
+            <span class="title" id="floors">1</span>
+            <button class="circle-middle title" id="btn-plus">+</button>
+          </div>
+          <div class="center">
+            <span class="semi-title">모임 설명</span>
+            <textarea></textarea>
+          </div>
+          <div class="right">
+            <button class="btn-new-next btn-next">다음</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--위치 조정할 건물 이미지-->
+    <div class="img-container hide">
+      <img
+        class="img-new-building"
+        src="img/buildings/building_5.png"
+        draggable="true"
+      />
+    </div>
+
+    <!--초대 코드: 초대 코드 입력-->
+    <div class="container-link hide main">
+      <div class="meeting-title span-2 center">
+        <span class="semi-title">초대 코드</span>
+        <input class="input-meeing-name" type="text" />
+      </div>
+      <div class="meeting-img center">
+        <div class="img-box">
+          <div class="img">
+            <img id="img-building-setting" src="img/buildings/building_5.png" />
+          </div>
+        </div>
+      </div>
+      <div class="meeting-info center">
+        <div>
+          <div>
+            <span class="semi-title">건물 주인</span>
+            <input type="text" placeholder="로그인한 사용자로 수정" readonly />
+          </div>
+          <div class="center">
+            <span class="semi-title">모임 설명</span>
+            <textarea></textarea>
+          </div>
+          <div class="right">
+            <button class="btn-invite-next btn-next">입장하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--캐릭터 설정-->
+    <div class="container-make-character hide main">
+      <div class="character-title span-2 center">
+        <span class="title white">캐릭터 생성하기</span>
+      </div>
+      <div class="character-img center">
+        <div class="img-box character">
+          <div class="img character">
+            <img id="img-character-setting" src="img/character/bear.png" />
+          </div>
+          <div class="right">
+            <button class="btn-retry" id="retry-character">
+              &#128472; 다시 뽑기 (3회)
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="meeting-info center">
+        <div>
+          <div>
+            <span class="semi-title">이름</span>
+            <input type="text" />
+          </div>
+          <div class="center">
+            <span class="semi-title">소개</span>
+            <textarea></textarea>
+          </div>
+          <div class="right">
+            <button class="btn-invite-next btn-next" id="character-setting">
+              입장하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/create_meeting.js"></script>
+  </body>
+</html>

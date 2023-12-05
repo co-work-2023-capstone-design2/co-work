@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "neodgm";
+  src: url("font/neodgm.woff") format("woff");
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/map.png");
+  font-family: "neodgm", sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin: 0;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* start_setting.html */
+.container-new.hide,
+.container-link.hide,
+.container-make-character.hide {
+  display: none;
+}
+
+.container-make-character {
+  z-index: 1;
+}
+
+/* move.html chatting */
+#text-chat.hide,
+#voice-chat.hide {
+  display: none;
+}
