@@ -13,6 +13,9 @@ $("#register-form").on("submit", (event) => {
   // to do: send user data to server
   fetch(register, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(user),
   })
     .then((res) => res.json())
