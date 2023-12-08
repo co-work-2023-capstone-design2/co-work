@@ -54,4 +54,44 @@
 #btn-back {
   font-size: 30px;
   font-family: "neodgm", sans-serif;
+  border: none;
+}
+
+.btn-setting {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+}
+
+#btn-owner-deco {
+  padding: 20px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 30px;
+  font-family: "neodgm", sans-serif;
+  border-radius: 100px;
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+}
+
+#btn-deco-reset {
+  padding: 20px;
+  border: none;
+  border-radius: 100px;
+  background-color: #E06263;
+  color: white;
+  font-size: 30px;
+  font-family: "neodgm", sans-serif;
+}
+
+#btn-deco-save {
+  padding: 20px;
+  border: none;
+  border-radius: 100px;
+  background-color: #6163DC;
+  color: white;
+  font-size: 30px;
+  font-family: "neodgm", sans-serif;
 }

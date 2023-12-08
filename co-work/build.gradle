@@ -35,6 +35,11 @@ dependencies {
 	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0' 	// RandomStringUtils 사용을 위한 implementation
 
+	//채팅을 위한 웹소켓 관련 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:sockjs-client:1.0.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

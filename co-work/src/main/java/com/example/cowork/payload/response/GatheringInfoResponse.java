@@ -10,6 +10,7 @@ import lombok.Setter;
 public class GatheringInfoResponse {
     private int state;
     private String gathering_code;
+    private String gathering_exterior;
     private String gathering_name;
     private String gathering_owner;
     private String gathering_explanation;

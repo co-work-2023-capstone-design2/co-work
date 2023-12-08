@@ -110,8 +110,8 @@ function render() {
     characterSize,
     characterSize
   );
-  // 사용자 닉네임에 맞게 수정해야함
-  const user_name = "닉네임 출력";
+
+  const user_name = localStorage.getItem("user-name");
   drawName(ctx, user_name, characterX, characterY);
 }
 

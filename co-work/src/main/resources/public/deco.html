@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/deco.css" />
+    <link rel="stylesheet" href="css/img-style.css" />
+    <title>공간 꾸미기</title>
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <div id="btn-exit">
+                <img src="img/exit-btn.png" />
+            </div>
+            <div class="container-drop">
+                <div id="drop-zone"></div>
+                <div id="drop-item">
+                    <div class="container-items-menu">
+                        <span>탁자</span>
+                        <span>쇼파</span>
+                        <span>책장</span>
+                        <span>바닥</span>
+                        <span>데코</span>
+                    </div>
+                    <div class="container-items">
+                        <img id="img-furniture" src="img/sofa1.png" draggable="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="container-btn">
+                <button id="btn-deco-reset">리셋하기</button>
+                <button id="btn-deco-save">저장하기</button>
+            </div>
+        </div>
+    </div>
+<script src="js/deco.js"></script>
+</body>
+</html>
