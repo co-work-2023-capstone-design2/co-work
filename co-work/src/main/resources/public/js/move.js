@@ -1,3 +1,5 @@
+const socket = new WebSocket(socketUrl);
+
 // make image
 let canvas;
 let ctx;
@@ -110,8 +112,8 @@ function render() {
     characterSize,
     characterSize
   );
-  // 사용자 닉네임에 맞게 수정해야함
-  const user_name = "닉네임 출력";
+
+  const user_name = localStorage.getItem("user"); // 지금은 이메일을 닉네임으로
   drawName(ctx, user_name, characterX, characterY);
 }
 
@@ -123,3 +125,7 @@ function main() {
 loadImage();
 setupKeyboardLister();
 main();
+
+$("#btn-owner-deco").on("click", () => {
+  window.location.href = "../deco.html";
+})

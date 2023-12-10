@@ -17,11 +17,34 @@ const characters = [
   "img/character/rabbit.png",
   "img/character/squirrel.png",
 ];
+let inviteCode;
+let isOwner;
 
 // 새로 만들기
+function setOwner() {
+  const currentUser = localStorage.getItem("user");
+  $("#meeting-owner").attr("placeholder", currentUser);
+}
+
+function setMeetingCode() {
+  fetch(getMeetingCode, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json()).then((data) => {
+    inviteCode = data.gathering_code;
+    $("#meeting-code").attr("placeholder", inviteCode);
+  });
+}
+
 $(".btn-new").on("click", () => {
+  isOwner = 1; // 모임 생성자
   $(".container").addClass("hide");
   $(".container-new").removeClass("hide");
+
+  setOwner();
+  setMeetingCode();
 });
 
 // 새로 만들기 -다시 뽑기 버튼
@@ -52,14 +75,52 @@ $("#btn-plus").on("click", () => {
   }
 });
 
-// 새로 만들기 -다음 버튼
+// 새로 만들기 -다음 버튼(모임 생성)
+function createMeeting() {
+  const meetingInfo = {
+    gathering_code: inviteCode,
+    gathering_exterior: buildingRandom,
+    gathering_name: $(".input-meeting-name").val(),
+    gathering_owner: $("#meeting-owner").attr("placeholder"),
+    gathering_floor: floors,
+    gathering_explanation: $("#meeting-info").val(),
+  };
+  fetch(setMeeting, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(meetingInfo),
+  }).then((res) => res.json()).then((data) => {
+    console.log(data);
+  })
+}
+
 $(".btn-new-next").on("click", () => {
+  // 모임 생성 api 연결
+  createMeeting();
+
   $(".container-new").addClass("hide");
   $(".img-container").removeClass("hide");
   $(".img-new-building").attr("src", buildings[buildingRandom]);
 });
 
-// drag-and-drop event
+// drag-and-drop event + 건물 위치 조정
+function setBuildingLocation(posX, posY) {
+  const buildingPos = {
+    gathering_code: inviteCode,
+    gathering_coord_x: posX,
+    gathering_coord_y: posY,
+  };
+  fetch(setLocation, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(buildingPos),
+  }).then((res) => res.json()).then((data) => console.log(data));
+}
+
 document
   .querySelector(".img-new-building")
   .addEventListener("dragstart", (event) => {
@@ -88,30 +149,56 @@ document.querySelector("body").addEventListener("drop", (event) => {
   clonedBuildingElement.style.top = posY + "px";
   clonedBuildingElement.style.position = "fixed";
   // input copy to drop container
-  let newBuilbing = document
+  let newBuilding = document
     .querySelector("body")
     .appendChild(clonedBuildingElement);
-  newBuilbing.id = "1"; // todo: change to random id
-  document.querySelector(".img-new-building").classList.add("hide");
+  newBuilding.id = "1"; // todo: change to random id
 
-  newBuilbing.onclick = function () {
+  // send to server building's position
+  setBuildingLocation(posX, posY);
+
+  document.querySelector(".img-new-building").classList.add("hide");
+  newBuilding.onclick = function () {
     $(".container-make-character").removeClass("hide");
   };
-  // todo
-  // send to server building's position
 });
 
 // 초대 코드로 들어가기 클릭
 $(".btn-link").on("click", () => {
+  isOwner = 2;
   $(".container").addClass("hide");
   $(".container-link").removeClass("hide");
+});
+
+// 초대 코드 입력 시
+function getInviteMeetingInfo(code) {
+  fetch(getInviteInfo + code, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json()).then((data) => {
+      $("#invite-owner").attr("placeholder", data.gathering_owner);
+      $("#invite-explain").attr("placeholder", data.gathering_explanation);
+      $("#img-building-setting-invite").attr("src", buildings[parseInt(data.gathering_exterior)]);
+  });
+}
+$("#form-meeting-name").on("submit", (e) => {
+  e.preventDefault();
+  const inputCode = $("#input-code").val();
+  getInviteMeetingInfo(inputCode);
+  inviteCode = inputCode;
 });
 
 // 초대 코드 폼 내 입장하기 버튼 클릭
 $(".btn-invite-next").on("click", () => {
   $(".container-link").addClass("hide");
   $(".container-make-character").removeClass("hide");
+  $("#character-name").attr("placeholder", localStorage.getItem("user"));
 });
+
+// 캐릭터 이름
+$("#character-name").attr("placeholder", localStorage.getItem("user"));
 
 // 캐릭터 생성 다시 뽑기 버튼
 let counter = 3;
@@ -122,12 +209,33 @@ $("#retry-character").on("click", () => {
     // change character img
     characterRandom = Math.floor(Math.random() * characters.length);
     $("#img-character-setting").attr("src", characters[characterRandom]);
-    // todo: save character number
   }
 });
 
 // 캐릭터 생성 입장하기 버튼
 $("#character-setting").on("click", () => {
   window.localStorage.setItem("character", characterRandom);
-  location.href = "move.html";
+  createCharacter();
+  location.href = `move.html?${inviteCode}`;
 });
+
+// 내가 생성하는 경우 1, 초대원 2
+function createCharacter() {
+  const characterInfo = {
+    gathering_code: inviteCode,
+    user_email: localStorage.getItem("user"),
+    user_image: characterRandom,
+    member_role: isOwner,
+    member_explanation: $("#character-introduce").val(),
+  }
+
+  fetch(setCharacter, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(characterInfo)
+  }).then((res) => res.json()).then((data) => console.log(data));
+
+  localStorage.setItem("user-name", $("#character-name").val());
+}

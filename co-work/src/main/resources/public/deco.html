@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/deco.css" />
+    <link rel="stylesheet" href="css/img-style.css" />
+    <title>공간 꾸미기</title>
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <div id="btn-exit">
+                <img src="img/exit-btn.png" />
+            </div>
+            <div class="container-drop">
+                <div id="drop-zone"></div>
+                <div id="drop-item">
+                    <div class="container-items-menu">
+                        <span>탁자</span>
+                        <span>쇼파</span>
+                        <span>책장</span>
+                        <span>바닥</span>
+                        <span>데코</span>
+                    </div>
+                    <div class="container-items">
+                        <img class="furniture" id="deco01" src="img/furniture/sofa1.png" draggable="true" />
+                        <img class="furniture" id="deco02" src="img/furniture/sofa2.png" draggable="true" />
+                        <img class="furniture" id="deco03" src="img/furniture/sofa3.png" draggable="true" />
+                        <img class="furniture" id="deco04" src="img/furniture/table1.png" draggable="true" />
+                        <img class="furniture" id="deco05" src="img/furniture/table2.png" draggable="true" />
+                        <img class="furniture" id="deco06" src="img/furniture/table3.png" draggable="true" />
+                        <img class="furniture" id="deco07" src="img/furniture/table4.png" draggable="true" />
+                        <img class="furniture" id="deco08" src="img/furniture/table5.png" draggable="true" />
+                        <img class="furniture" id="deco09" src="img/furniture/pot1.png" draggable="true" />
+                        <img class="furniture" id="deco10" src="img/furniture/pot2.png" draggable="true" />
+                        <img class="furniture" id="deco11" src="img/furniture/chair1.png" draggable="true" />
+                        <img class="furniture" id="deco12" src="img/furniture/chair2.png" draggable="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="container-btn">
+                <button id="btn-deco-reset">리셋하기</button>
+                <button id="btn-deco-save">저장하기</button>
+            </div>
+        </div>
+    </div>
+<script src="js/deco.js"></script>
+</body>
+</html>

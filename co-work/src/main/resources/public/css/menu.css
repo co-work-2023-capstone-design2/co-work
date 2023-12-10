@@ -51,7 +51,8 @@
 }
 
 .todo-form,
-#todo-list div {
+#meeting-todo-list div,
+#personal-todo-list div {
   display: flex;
   justify-content: space-around;
   margin-bottom: 15px;

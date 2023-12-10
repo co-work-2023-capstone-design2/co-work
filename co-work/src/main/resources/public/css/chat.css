@@ -1,0 +1,29 @@
+.chat-container {
+    overflow: auto;
+    display: block;
+}
+
+#chatting-log {
+    width: 95%;
+    height: 100%;
+    overflow-y: auto;
+    display: block;
+    align-items: end;
+}
+
+#chatting-log::-webkit-scrollbar {
+    width: 5px;
+}
+#chatting-log::-webkit-scrollbar-thumb {
+    height: 30%;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+.chat-unit {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    margin: 5px;
+}

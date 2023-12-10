@@ -1,0 +1,94 @@
+-- create database capstone_db;
+
+use capstone_db;
+
+# 사용자
+CREATE TABLE users (
+	user_email varchar(50),				# 이메일, 아이디로 사용, 기본키
+    user_name varchar(20), 				# 사용자 이름
+	user_pw varchar(1000) NOT NULL,		# 비밀번호 암호화
+	user_created_at date NOT NULL,		# 사용자 가입 날짜
+	user_updated_at date,				# 닉네임, 비번 수정 날짜 (아이디는 수정 불가)
+	user_deleted_at date,				# 삭제된 날짜, 실제로 삭제 X (not null이면 삭제된 데이터로 취급)
+	PRIMARY KEY (user_email)			# 아이디가 기본키
+);
+
+# 모임 정보
+CREATE TABLE gathering (
+	gathering_code varchar(100),													# 모임 식별 코드
+	gathering_exterior varchar(500),												# 이미지 주소
+	gathering_name varchar(30),														# 모임 이름
+	gathering_owner varchar(50),													# 모임장, 이메일, users 테이블 외래키
+	gathering_floor int,															# 총 층수
+    gathering_explanation varchar(200),												# 모임 설명
+	gathering_coord_x int,															# x축 좌표
+	gathering_coord_y int,															# y축 좌표
+	gathering_created_at date NOT NULL,												# 모임 생성 날짜
+	gathering_updated_at date,														# 모임 데이터 수정 날짜
+	gathering_deleted_at date,														# 모임 삭제 날짜, 실제로 삭제 X (not null이면 삭제된 데이터로 취급)
+	PRIMARY KEY(gathering_code),													# 모임 식별 코드가 기본키
+	FOREIGN KEY (gathering_owner) references users(user_email) on update cascade	# 모임장은 users 테이블 외래키
+);
+
+# 모임 멤버 역할
+# 모임장(owner), 모임원(member), (추후 추가될 수 도 있음)
+CREATE TABLE roles(
+	roles_id int,		# 역할 아이디, 기본키
+	roles_name varchar(50),	# 역할 이름
+	PRIMARY KEY(roles_id)	# 역할 아이디가 기본키
+);
+
+-- Inserting 'owner' role
+INSERT INTO roles (roles_id, roles_name) VALUES (1, 'owner');
+
+-- Inserting 'member' role
+INSERT INTO roles (roles_id, roles_name) VALUES (2, 'member');
+
+# 모임 멤버
+CREATE TABLE members (
+    member_id INT auto_increment,                        -- 멤버 아이디, 기본키
+    member_image VARCHAR(500),            -- 멤버 캐릭터 이미지
+    gathering_code VARCHAR(100),         -- 모임 식별 코드, gathering 테이블 외래키
+    user_email VARCHAR(50),               -- 멤버 이메일, user 테이블 외래키
+    member_role INT,                      -- 모임 멤버 역할, roles 테이블 외래키
+    member_explanation VARCHAR(200),      -- 자기소개
+    member_joined_at DATE,                -- 모임 가입 날짜
+    member_leaved_at DATE,                -- 모임 탈퇴 날짜, (not null이면 삭제된 데이터로 취급)
+    member_updated_at DATE,               -- 수정된 날짜, 탈퇴 후 재가입시 탈퇴 날짜 지우고, 수정 날짜 업데이트, 이전에 가입한 적이 있는지 구별용, 추후 재가입하겠습니까? 물어보는 용도로 사용 예정
+    PRIMARY KEY(member_id),                -- 멤버 아이디가 기본키
+    FOREIGN KEY(gathering_code) REFERENCES gathering(gathering_code) ON UPDATE CASCADE,   -- gathering 테이블 외래키
+    FOREIGN KEY(user_email) REFERENCES users(user_email) ON UPDATE CASCADE,               -- users 테이블 외래키
+    FOREIGN KEY(member_role) REFERENCES roles(roles_id) ON UPDATE CASCADE ON DELETE CASCADE -- roles 테이블 외래키
+);
+
+-- # 투두 (프론트 로컬 구현)
+
+-- CREATE TABLE todo(
+--     todo_id INT auto_increment,         -- 투두 아이디, 기본키
+--     user_email VARCHAR(50),             -- 유저 이메일, user 테이블 외래키
+--     todo_contents VARCHAR(100),         -- 투두 내용
+--     gathering_code VARCHAR(100),        -- 모임 초대(식별) 코드, gathering 테이블 외래키/ null 일 경우 개인 투두
+--     todo_state TINYINT,                 -- 투두 상태, 0: 미완료, 1: 완료
+--     todo_created_at DATE,               -- 투두 생성 날짜
+--     todo_updated_at DATE,               -- 투두 수정 날짜
+--     todo_deleted_at DATE,               -- 투두 삭제 날짜
+--     PRIMARY KEY(todo_id),               -- 투두 아이디가 기본키
+--     FOREIGN KEY(user_email) REFERENCES users(user_email) ON UPDATE CASCADE,               -- users 테이블 외래키
+--     FOREIGN KEY(gathering_code) REFERENCES gathering(gathering_code) ON UPDATE CASCADE   -- gathering 테이블 외래키
+-- );
+
+-- DROP table chat;
+
+CREATE TABLE chat (
+    chat_id INT auto_increment,
+    chat_session VARCHAR(200), 		-- 세션
+    gathering_code VARCHAR(100),	-- 모임 초대(식별) 코드
+    content VARCHAR(500),			-- 채팅 내용
+    sender VARCHAR(100),			-- 보낸 사람, 유저 이메일, user 테이블 외래키
+    sendtime DATETIME,				-- 보낸 시간
+    PRIMARY KEY (chat_id),			-- 채팅 아이디가 기본키
+    FOREIGN KEY (sender) REFERENCES users(user_email) ON UPDATE CASCADE,					-- users 테이블 외래키
+    FOREIGN KEY (gathering_code) REFERENCES gathering(gathering_code) ON UPDATE CASCADE		-- gathering 테이블 외래키
+);
+
+-- select * from chat;

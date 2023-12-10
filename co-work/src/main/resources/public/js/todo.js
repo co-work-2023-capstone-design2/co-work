@@ -1,14 +1,22 @@
+// default: 모임 투두
+$(".meeting-check").addClass("selected");
+$(".meeting-check").css({
+  "border-bottom": "1px solid #6063dc",
+});
+
 // 투두리스트 로컬로 기능 구현 해놓기
-const todoForm = document.querySelector(".todo-form");
-const todoInput = document.querySelector(".todo-form input");
-const todoList = document.querySelector("#todo-list");
+let isMeetingTodo = true;
+const commonForm = document.querySelector("#todo-common-form");
+const personalForm = document.querySelector("#todo-personal-form");
+const meetingTodoList = document.querySelector("#meeting-todo-list");
+const personalTodoList = document.querySelector("#personal-todo-list");
 
 const TODOS_KEY = "todos";
 
 let todos = [];
 
 function saveToDos() {
-  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
 function paintToDo(newTodo) {
@@ -22,11 +30,23 @@ function paintToDo(newTodo) {
 
   todoElement.appendChild(checkImg);
   todoElement.appendChild(input);
-  todoList.appendChild(todoElement);
+  if (isMeetingTodo) {
+    meetingTodoList.appendChild(todoElement);
+  }
+  if (!isMeetingTodo) {
+    personalTodoList.appendChild(todoElement);
+  }
 }
 
 function handleToDoSubmit(event) {
   event.preventDefault();
+  let todoInput;
+  if (isMeetingTodo) {
+    todoInput = document.querySelector("#todo-common-form input");
+  }
+  if (!isMeetingTodo) {
+    todoInput = document.querySelector("#todo-personal-form input");
+  }
   const newTodo = todoInput.value;
   todoInput.value = "";
   const newTodoObj = {
@@ -38,10 +58,12 @@ function handleToDoSubmit(event) {
   saveToDos();
 }
 
-todoForm.addEventListener("submit", handleToDoSubmit);
+commonForm.addEventListener("submit", handleToDoSubmit);
+personalForm.addEventListener("submit", handleToDoSubmit);
 
 // 투두 섹션 선택
 $(".meeting-check").on("click", () => {
+  isMeetingTodo = true;
   $(".meeting-check").addClass("selected");
   $(".meeting-check").css({
     "border-bottom": "1px solid #6063dc",
@@ -50,9 +72,13 @@ $(".meeting-check").on("click", () => {
   $(".personal-check").css({
     "border-bottom": "1px solid white",
   });
+
+  $(".todo-list-common").removeClass("hide");
+  $(".todo-list-personal").addClass("hide");
 });
 
 $(".personal-check").on("click", () => {
+  isMeetingTodo = false;
   $(".personal-check").addClass("selected");
   $(".personal-check").css({
     "border-bottom": "1px solid #6063dc",
@@ -61,4 +87,7 @@ $(".personal-check").on("click", () => {
   $(".meeting-check").css({
     "border-bottom": "1px solid white",
   });
+
+  $(".todo-list-common").addClass("hide");
+  $(".todo-list-personal").removeClass("hide");
 });

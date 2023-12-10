@@ -2,6 +2,7 @@ package com.example.cowork.service;
 
 import com.example.cowork.etcData.Date;
 import com.example.cowork.model.GatheringModel;
+import com.example.cowork.payload.response.GatheringInfoResponse;
 import com.example.cowork.payload.response.MessageResponse;
 import com.example.cowork.payload.response.RandomCodeResponse;
 import com.example.cowork.payload.response.StateResponse;
@@ -20,6 +21,9 @@ public class GatheringService {
     @Autowired
     private GatheringRepository gatheringRepository;
 
+    @Autowired
+    private ChatService chatService;
+
     public ResponseEntity<?> createGatheringCode(){
         String randCode;
 
@@ -30,14 +34,12 @@ public class GatheringService {
         return ResponseEntity.ok(new RandomCodeResponse(200, randCode));
     }
 
-    public ResponseEntity<?> createGathering(
-            String gathering_code,
-            String gathering_exterior,
-            String gathering_name,
-            String gathering_owner,
-            int gathering_floor,
-            String gathering_explanation
-    ){
+    public ResponseEntity<?> createGathering(String gathering_code,
+                                             String gathering_exterior,
+                                             String gathering_name,
+                                             String gathering_owner,
+                                             int gathering_floor,
+                                             String gathering_explanation){
         GatheringModel newGathering = new GatheringModel();
         newGathering.setGathering_code(gathering_code);
         newGathering.setGathering_exterior(gathering_exterior);
@@ -47,6 +49,7 @@ public class GatheringService {
         newGathering.setGathering_explanation(gathering_explanation);
         newGathering.setGathering_created_at(Date.getCurrentDate());
 
+        // 디비에 모임 저장
         try {
             gatheringRepository.save(newGathering);
         } catch (DataIntegrityViolationException e){
@@ -54,9 +57,13 @@ public class GatheringService {
                     .badRequest()
                     .body(new MessageResponse(400, "db 저장 error"));
         }
-        
-        return ResponseEntity.ok(new StateResponse(200));
+
+        // 채팅 만들기
+        // 채팅방까지 잘 만들어지면 클라이언트로 200 보냄
+        return chatService.createChatRoom(gathering_code);
+        //return ResponseEntity.ok(new StateResponse(200));
     }
+
 
     public ResponseEntity<?> setLocation(
             String gathering_code,
@@ -90,7 +97,24 @@ public class GatheringService {
     }
 
     public ResponseEntity<?>getGatheringInfoByCode(String gathering_code){
-//        Optional<GatheringModel> = gatheringRepository.findById()
-        return null;
+        Optional<GatheringModel> optionalGatheringModel = gatheringRepository.findById(gathering_code);
+
+        if (optionalGatheringModel.isPresent()) {
+            GatheringModel existingGatheringModel = optionalGatheringModel.get();
+
+            return ResponseEntity
+                    .ok(new GatheringInfoResponse(
+                            200,
+                            existingGatheringModel.getGathering_code(),
+                            existingGatheringModel.getGathering_exterior(),
+                            existingGatheringModel.getGathering_name(),
+                            existingGatheringModel.getGathering_owner(),
+                            existingGatheringModel.getGathering_explanation()
+                    ));
+        }
+
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse(400, "모임이 존재하지 않음"));
     }
 }

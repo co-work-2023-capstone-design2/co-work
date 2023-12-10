@@ -1,5 +1,3 @@
-const register = "http://localhost:5500/api/auth/signup";
-
 $("#register-form").on("submit", (event) => {
   event.preventDefault();
   const input_name = $("#user-name").val();
@@ -18,8 +16,11 @@ $("#register-form").on("submit", (event) => {
     },
     body: JSON.stringify(user),
   })
-    .then((res) => res.json())
-    .then((json) => console.log(json));
-
-  // location.href = "login.html";
+    .then((res) => res.json()).then((data) => {
+      if (data.state === 200) {
+        location.href = "login.html";
+      } else {
+        console.log("실패");
+      }
+  });
 });

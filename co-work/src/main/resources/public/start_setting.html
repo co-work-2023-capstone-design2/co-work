@@ -20,6 +20,9 @@
     <title>Co-Work</title>
   </head>
   <body>
+    <a href="index.html" class="btn-setting">
+      <button class="circle" id="btn-back">이전</button>
+    </a>
     <div class="container">
       <button class="btn-square btn-new">새로 만들기</button>
       <button class="btn-square btn-link">초대 코드로 들어가기</button>
@@ -29,12 +32,12 @@
     <div class="container-new hide main">
       <div class="meeting-title span-2 center">
         <span class="semi-title">모임 이름</span>
-        <input class="input-meeing-name" type="text" />
+        <input class="input-meeting-name" type="text" />
       </div>
       <div class="meeting-img center">
         <div class="img-box">
           <div class="img">
-            <img id="img-building-setting" src="img/buildings/building_5.png" />
+            <img id="img-building-setting" src="img/buildings/building_1.png" />
           </div>
           <div class="right">
             <button class="btn-retry">&#128472; 다시 뽑기</button>
@@ -45,11 +48,11 @@
         <div>
           <div>
             <span class="semi-title">건물 주인</span>
-            <input type="text" placeholder="로그인한 사용자로 수정" readonly />
+            <input id="meeting-owner" type="text" readonly />
           </div>
           <div>
             <span class="semi-title">초대 코드</span>
-            <input type="text" placeholder="초대코드 생성 수정" readonly />
+            <input id="meeting-code" type="text" readonly />
           </div>
           <div>
             <span class="semi-title">건물 층수</span>
@@ -59,7 +62,7 @@
           </div>
           <div class="center">
             <span class="semi-title">모임 설명</span>
-            <textarea></textarea>
+            <textarea id="meeting-info"></textarea>
           </div>
           <div class="right">
             <button class="btn-new-next btn-next">다음</button>
@@ -72,7 +75,6 @@
     <div class="img-container hide">
       <img
         class="img-new-building"
-        src="img/buildings/building_5.png"
         draggable="true"
       />
     </div>
@@ -81,12 +83,14 @@
     <div class="container-link hide main">
       <div class="meeting-title span-2 center">
         <span class="semi-title">초대 코드</span>
-        <input class="input-meeing-name" type="text" />
+        <form id="form-meeting-name" method="post">
+          <input id="input-code" type="text" />
+        </form>
       </div>
       <div class="meeting-img center">
         <div class="img-box">
           <div class="img">
-            <img id="img-building-setting" src="img/buildings/building_5.png" />
+            <img id="img-building-setting-invite" />
           </div>
         </div>
       </div>
@@ -94,11 +98,11 @@
         <div>
           <div>
             <span class="semi-title">건물 주인</span>
-            <input type="text" placeholder="로그인한 사용자로 수정" readonly />
+            <input id="invite-owner" type="text" readonly />
           </div>
           <div class="center">
             <span class="semi-title">모임 설명</span>
-            <textarea></textarea>
+            <textarea id="invite-explain" readonly></textarea>
           </div>
           <div class="right">
             <button class="btn-invite-next btn-next">입장하기</button>
@@ -128,11 +132,11 @@
         <div>
           <div>
             <span class="semi-title">이름</span>
-            <input type="text" />
+            <input id="character-name" type="text" readonly/>
           </div>
           <div class="center">
             <span class="semi-title">소개</span>
-            <textarea></textarea>
+            <textarea id="character-introduce"></textarea>
           </div>
           <div class="right">
             <button class="btn-invite-next btn-next" id="character-setting">
@@ -142,7 +146,7 @@
         </div>
       </div>
     </div>
-
+    <script src="js/server.js"></script>
     <script src="js/create_meeting.js"></script>
   </body>
 </html>
