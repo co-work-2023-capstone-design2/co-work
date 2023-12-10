@@ -41,9 +41,11 @@ CO-WORK는 로그인 후 사용할 수 있다.
 2023.09. ~ 2023.12.
 
 - 사용 기술
+  
 ![image](https://github.com/co-work-2023-capstone-design2/co-work/assets/86397095/75c003e6-1f5f-4b02-8a63-3fc37bdcb2cb)
 
 - 진행 일정
+  
 ![WBS](https://github.com/co-work-2023-capstone-design2/co-work/assets/86397095/a1351986-6042-4b9c-859e-688bbc5f4506)
 
 - 레이아웃 구성
@@ -64,12 +66,15 @@ CO-WORK는 로그인 후 사용할 수 있다.
 캐릭터 설정 화면에서 설정한 캐릭터로 모임 내부를 키보드로 이동시킬 수 있는 화면이다. 모임 또는 자신의 계획 설정이 가능하며, 모임에 참여한 다른 사용자와의 소통이 가능한 화면이다.
 
 - ERD
+  
 ![image](https://github.com/co-work-2023-capstone-design2/co-work/assets/86397095/3b556faa-34e1-4df9-80bb-3e725280e63c)
 
 - 웹사이트 흐름
+  
 ![image](https://github.com/co-work-2023-capstone-design2/co-work/assets/86397095/c7293dd2-18e3-44e2-bf21-a5502f919b59)
 
 - 서버 구조
+  
 ![image](https://github.com/co-work-2023-capstone-design2/co-work/assets/86397095/f6531573-ac1e-488c-9b54-e9f493ff34ab)
 
 - API 명세서
