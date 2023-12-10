@@ -1,4 +1,10 @@
-// drag-and-drop event
+document.querySelectorAll(".furniture").forEach((element) => {
+    element.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text/plain", event.target.id);
+        console.log(event.target.id);
+    })
+});
+
 document.querySelector("#drop-zone").addEventListener("dragover", (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -9,8 +15,9 @@ document.querySelector("#drop-zone").addEventListener("drop", (event) => {
     event.stopPropagation();
 
     // put furniture
-    $("#furniture").attr("src", "img/sofa1.png");
-    const furnitureElement = document.querySelector("#img-furniture");
+    const furnitureId = event.dataTransfer.getData("text/plain");
+    console.log(furnitureId);
+    const furnitureElement = document.querySelector(`#${furnitureId}`);
     const clonedFurnitureElement = furnitureElement.cloneNode(); // copy
     // copy position setting
     const posX = event.offsetX + 50;

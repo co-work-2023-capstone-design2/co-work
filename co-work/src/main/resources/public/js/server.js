@@ -12,4 +12,5 @@ const getInviteInfo = "http://localhost:5500/api/gathering/getGatheringInfoByCod
 const setCharacter = "http://localhost:5500/api/member/createCharacter";
 
 // 웹소켓 연결
+const createChatRoom = "http://localhost:5500/chat/addGatheringList";
 const socketUrl = 'ws://localhost:5500/ws/chat';

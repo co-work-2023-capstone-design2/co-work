@@ -187,13 +187,18 @@ $("#form-meeting-name").on("submit", (e) => {
   e.preventDefault();
   const inputCode = $("#input-code").val();
   getInviteMeetingInfo(inputCode);
+  inviteCode = inputCode;
 });
 
 // 초대 코드 폼 내 입장하기 버튼 클릭
 $(".btn-invite-next").on("click", () => {
   $(".container-link").addClass("hide");
   $(".container-make-character").removeClass("hide");
+  $("#character-name").attr("placeholder", localStorage.getItem("user"));
 });
+
+// 캐릭터 이름
+$("#character-name").attr("placeholder", localStorage.getItem("user"));
 
 // 캐릭터 생성 다시 뽑기 버튼
 let counter = 3;
@@ -204,7 +209,6 @@ $("#retry-character").on("click", () => {
     // change character img
     characterRandom = Math.floor(Math.random() * characters.length);
     $("#img-character-setting").attr("src", characters[characterRandom]);
-    // todo: save character number
   }
 });
 
@@ -212,7 +216,7 @@ $("#retry-character").on("click", () => {
 $("#character-setting").on("click", () => {
   window.localStorage.setItem("character", characterRandom);
   createCharacter();
-  location.href = "move.html";
+  location.href = `move.html?${inviteCode}`;
 });
 
 // 내가 생성하는 경우 1, 초대원 2
@@ -224,5 +228,14 @@ function createCharacter() {
     member_role: isOwner,
     member_explanation: $("#character-introduce").val(),
   }
+
+  fetch(setCharacter, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(characterInfo)
+  }).then((res) => res.json()).then((data) => console.log(data));
+
   localStorage.setItem("user-name", $("#character-name").val());
 }
